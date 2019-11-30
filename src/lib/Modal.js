@@ -1,7 +1,7 @@
 /* eslint-disable react/self-closing-comp */
 import React from "react";
 import "./Modal.css";
-import ReactCssTransitionGroup from "react-addons-css-transition-group";
+import ReactCSSTransitionGroup from "react-addons-css-transition-group";
 import PropTypes from "prop-types";
 
 const Modal = props => {
@@ -22,13 +22,13 @@ const Modal = props => {
   }
 
   return (
-    <ReactCssTransitionGroup
+    <ReactCSSTransitionGroup
       transitionName="modal"
       transitionEnterTimeout={500}
       transitionLeaveTimeout={300}
     >
       {ret}
-    </ReactCssTransitionGroup>
+    </ReactCSSTransitionGroup>
   );
 };
 

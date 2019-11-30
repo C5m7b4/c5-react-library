@@ -1,28 +1,5 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import ColorHeadingOne from "./lib/ColorHeadingOne";
+import ColorHeadingTwo from "./lib/ColorHeadingTwo";
+import Modal from "./lib/Modal";
 
-export class ColorHeadingOne extends Component {
-  static propTypes = {
-    text: PropTypes.string,
-    color: PropTypes.string
-  };
-
-  render() {
-    const { text, color } = this.props;
-
-    return <h1 style={{ color }}>{text}</h1>;
-  }
-}
-
-export class ColorHeadingTwo extends Component {
-  static propTypes = {
-    text: PropTypes.string,
-    color: PropTypes.string
-  };
-
-  render() {
-    const { text, color } = this.props;
-
-    return <h1 style={{ color }}>{text}</h1>;
-  }
-}
+export { ColorHeadingOne, ColorHeadingTwo, Modal };
