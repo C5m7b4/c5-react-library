@@ -25,7 +25,7 @@ export default class App extends Component {
           onCloseClicked={this.toggleState}
           onBackDropClicked={this.toggleState}
         >
-          Im a modal
+          <div>Im a modal</div>
         </Modal>
       </div>
     );

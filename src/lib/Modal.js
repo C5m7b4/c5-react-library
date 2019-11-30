@@ -34,7 +34,7 @@ const Modal = props => {
 
 Modal.propTypes = {
   open: PropTypes.bool,
-  children: PropTypes.array,
+  children: PropTypes.object,
   onBackDropClicked: PropTypes.func,
   onModalClicked: PropTypes.func,
   onCloseClicked: PropTypes.func
