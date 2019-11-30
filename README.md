@@ -1,10 +1,31 @@
 # c5-react-library
 
-[![npm](https://img.shields.io/badge/npm-v0.10.0-orange)](https://www.npmjs.com/package/c5-react-library)
+> Simple Library containing toggles, modals, and form components
 
+[![NPM](https://img.shields.io/npm/v/c5-react-library.svg)](https://www.npmjs.com/package/c5-react-library) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-Small Library that supplies basic components like modals, toggle, and basic form components.
-Also, this library is hopefully going to house an iOS Date Picker component for web apps.
+## Install
 
-#Install
-npm install c5-react-library --save
+```bash
+npm install --save c5-react-library
+```
+
+## Usage
+
+```jsx
+import React, { Component } from 'react'
+
+import MyComponent from 'c5-react-library'
+
+class Example extends Component {
+  render () {
+    return (
+      <MyComponent />
+    )
+  }
+}
+```
+
+## License
+
+MIT © [C5m7b4](https://github.com/C5m7b4)
