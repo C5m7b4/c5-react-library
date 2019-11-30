@@ -1,13 +1,16 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 
-import ExampleComponent from 'c5-react-library'
+import { ColorHeadingOne, ColorHeadingTwo } from "c5-react-library";
 
 export default class App extends Component {
-  render () {
+  render() {
     return (
       <div>
-        <ExampleComponent text='Modern React component module' />
+        <ColorHeadingOne text="Colored heading one is working" color={"red"} />
+
+        {/* Our other component */}
+        <ColorHeadingTwo text="Another Heading" color={"blue"} />
       </div>
-    )
+    );
   }
 }
