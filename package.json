@@ -1,0 +1,25 @@
+{
+  "name": "c5-react-library",
+  "version": "0.10.0",
+  "description": "Small library that supplies basic components like modals, toggles, and basic form components.",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "jest --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/C5m7b4/c5-react-library.git"
+  },
+  "keywords": [
+    "react",
+    "modal",
+    "forms",
+    "toggle"
+  ],
+  "author": "C5m7b4",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/C5m7b4/c5-react-library/issues"
+  },
+  "homepage": "https://github.com/C5m7b4/c5-react-library#readme"
+}
