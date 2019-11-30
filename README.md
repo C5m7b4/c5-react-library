@@ -4,7 +4,7 @@
 [![NPM](https://img.shields.io/npm/v/c5-react-library.svg)](https://www.npmjs.com/package/c5-react-library)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-> Simple Library containing toggles, modals, and form components
+> Simple Library containing toggles, modals, form components, and an iOS Date Picker component for Web Apps.
 
 ## Install
 
