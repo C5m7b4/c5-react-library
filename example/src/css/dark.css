@@ -1,0 +1,23 @@
+/* dark */
+.datepicker-navbar-btn.dark {
+  background-color: var(--dark-bg);
+}
+.datepicker-header {
+  color: var(--dark-theme);
+}
+.datepicker-wheel {
+  border-top: 1px solid var(--dark-theme);
+  border-bottom: 1px solid var(--dark-theme);
+}
+.datepicker-caption-item {
+  color: var(--dark-color);
+}
+li {
+  color: var(--dark-color);
+}
+li.disabled {
+  color: var(--dark-disabled-color);
+}
+.datepicker-navbar-btn {
+  color: var(--dark-theme);
+}

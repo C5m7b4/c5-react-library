@@ -29,6 +29,15 @@ export default class App extends Component {
     this.setState({ isOpen: false });
   };
 
+  formatDate = date => {
+    var testDate = new Date(date),
+      month = testDate.getMonth() + 1,
+      day = testDate.getDate(),
+      year = testDate.getFullYear();
+
+    return month + "/" + day + "/" + year;
+  };
+
   render() {
     return (
       <div style={{ width: 800, margin: "15px auto" }}>
@@ -46,6 +55,13 @@ export default class App extends Component {
             isOpen={this.state.isOpen}
             onSelect={this.handleDateSelect}
             onCancel={this.handleCloseDatePicker}
+          />
+        </div>
+        <div>
+          <input
+            style={{ marginTop: "20px" }}
+            type="text"
+            value={this.formatDate(this.state.time)}
           />
         </div>
       </div>

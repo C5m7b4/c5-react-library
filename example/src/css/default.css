@@ -1,0 +1,71 @@
+.datepicker-header {
+  padding: 0 0.5em;
+  min-height: 2em;
+  line-height: 2em;
+  font-size: 1.125em;
+}
+.datepicker-navbar {
+  padding: 0 0.5em 0.5em 0.5em;
+  overflow: hidden;
+}
+.datepicker-navbar-btn {
+  height: 2.5em;
+  line-height: 2.5em;
+  float: right;
+  padding: 0 1em;
+  cursor: pointer;
+}
+.datepicker-caption {
+  display: flex;
+  padding: 0.5em 0.25em;
+}
+.datepicker-caption-item {
+  flex: 1;
+  margin: 0 0.25em;
+  height: 40px;
+  line-height: 40px;
+  font-size: 1.2em;
+}
+.datepicker-content {
+  display: flex;
+  padding: 0.5em 0.25em;
+}
+.datepicker-col-1 {
+  flex: 1;
+  margin: 0 0.25em;
+}
+.datepicker-viewport {
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+}
+.datepicker-viewport::after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  pointer-events: none;
+}
+.datepicker-wheel {
+  position: absolute;
+  height: 40px;
+  top: 50%;
+  margin-top: -20px;
+  width: 100%;
+}
+.datepicker-scroll {
+  list-style-type: none;
+  padding: 0;
+}
+.datepicker-scroll > li {
+  height: 40px;
+  line-height: 40px;
+  font-size: 1.375em;
+  cursor: pointer;
+}
+.datepicker.default {
+  background-color: var(--default-bg);
+}

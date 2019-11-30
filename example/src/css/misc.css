@@ -1,0 +1,19 @@
+.datepicker-header {
+  color: var(--default-theme);
+}
+.datepicker-wheel {
+  border-top: 1px solid var(--default-theme);
+  border-bottom: 1px solid var(--default-theme);
+}
+.datepicker-caption-item {
+  color: var(--default-color);
+}
+li {
+  color: var(--default-color);
+}
+li.disabled {
+  color: var(--default-disabled-color);
+}
+.datepicker-navbar-btn {
+  color: var(--default-theme);
+}

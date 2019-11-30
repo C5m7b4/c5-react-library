@@ -9,11 +9,6 @@ export const defaultProps = {
   showHeader: true,
   showCaption: false,
   dateConfig: {
-    year: {
-      format: "YYYY",
-      caption: "Year",
-      step: 1
-    },
     month: {
       format: "M",
       caption: "Mon",
@@ -23,19 +18,21 @@ export const defaultProps = {
       format: "D",
       caption: "Day",
       step: 1
+    },
+    year: {
+      format: "YYYY",
+      caption: "Year",
+      step: 1
     }
   },
-  headerFormat: "YYYY/MM/DD",
-  confirmText: "完成",
-  cancelText: "取消",
+  headerFormat: "MM/DD/YYYY",
+  confirmText: "Confirm",
+  cancelText: "Cancel",
   onChange: () => {},
   onSelect: () => {},
   onCancel: () => {}
 };
 
-/**
- * 日期配置
- */
 export const dateConfigMap = {
   year: {
     format: "YYYY",
