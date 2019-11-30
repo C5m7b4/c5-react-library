@@ -1,15 +1,34 @@
 import React, { Component } from "react";
-import "./Modal.css";
 
-import { ColorHeadingOne, ColorHeadingTwo, Modal } from "c5-react-library";
+import {
+  ColorHeadingOne,
+  ColorHeadingTwo,
+  ModalDatePicker
+} from "c5-react-library";
 
 export default class App extends Component {
   state = {
-    open: false
+    open: false,
+    time: new Date(),
+    isOpen: false
   };
+
   toggleState = () => {
     this.setState(prevState => ({ open: !prevState.open }));
   };
+
+  handleOpenDatePicker = () => {
+    this.setState({ isOpen: true });
+  };
+  handleDateSelect = time => {
+    this.setState({ time, isOpen: false });
+    console.log(time);
+  };
+
+  handleCloseDatePicker = () => {
+    this.setState({ isOpen: false });
+  };
+
   render() {
     return (
       <div style={{ width: 800, margin: "15px auto" }}>
@@ -20,13 +39,15 @@ export default class App extends Component {
 
         {/* This is our Modal Component */}
         <button onClick={this.toggleState}>Open Modal</button>
-        <Modal
-          open={this.state.open}
-          onCloseClicked={this.toggleState}
-          onBackDropClicked={this.toggleState}
-        >
-          <div>Im a modal</div>
-        </Modal>
+        <div style={{ marginTop: "30px" }}>
+          <button onClick={this.handleOpenDatePicker}>Select Date</button>
+          <ModalDatePicker
+            value={this.state.time}
+            isOpen={this.state.isOpen}
+            onSelect={this.handleDateSelect}
+            onCancel={this.handleCloseDatePicker}
+          />
+        </div>
       </div>
     );
   }

@@ -1,7 +1,6 @@
 import React from "react";
 import Modal from "./Modal";
 import renderer from "react-test-renderer";
-import { JestEnvironment } from "@jest/environment";
 
 describe("Modal", () => {
   it("should exist", () => {

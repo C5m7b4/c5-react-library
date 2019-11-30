@@ -1,5 +1,5 @@
 import ColorHeadingOne from "./lib/ColorHeadingOne";
 import ColorHeadingTwo from "./lib/ColorHeadingTwo";
-import Modal from "./lib/Modal";
+import ModalDatePicker from "./lib/DatePicker";
 
-export { ColorHeadingOne, ColorHeadingTwo, Modal };
+export { ColorHeadingOne, ColorHeadingTwo, ModalDatePicker };
