@@ -108,3 +108,6 @@ export default App;
 ## License
 
 MIT © [C5m7b4](https://github.com/C5m7b4)
+
+#Here are some Screenshots of the Components
+![Image of the Basics](https://github.com/C5m7b4/c5-react-library/github/sample-image-1.png)
