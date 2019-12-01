@@ -1,7 +1,3 @@
-/**
- * @module time
- */
-
 function throwIfInvalidDate(date) {
   if (Object.prototype.toString.call(date, null) !== "[object Date]") {
     throw new Error("Invalid Date");
@@ -12,11 +8,6 @@ function daysInMonth(year, month) {
   return new Date(year, month + 1, 0).getDate();
 }
 
-/**
- *
- * @param  {Date}
- * @return {String}
- */
 export function convertDate(date, format) {
   let str = format;
   const o = {
@@ -51,11 +42,6 @@ export function convertDate(date, format) {
   return str;
 }
 
-/**
- *
- * @param  {Date}
- * @return {number}
- */
 export function nextYear(now, index = 0) {
   throwIfInvalidDate(now);
   const date = new Date(
