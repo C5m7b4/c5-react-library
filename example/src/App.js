@@ -40,24 +40,26 @@ const App = () => {
   };
 
   return (
-    <div style={{ width: 800, margin: "15px auto" }}>
-      <h1>Testing</h1>
+    <div className="container-fluid">
+      <div className="row justify-content-center text-center p-4">
+        <div className="col-12">
+          <h3>c5-react-library kitchen sink</h3>
+        </div>
 
-      <ColorHeadingOne text="Colored heading one is working" color={"red"} />
+        <hr />
+        <div className="mt-5">
+          <h4>Basic Toggle Switch used to turn things on and off.</h4>
+          <Slider />
+        </div>
 
-      <ColorHeadingTwo text="Another Heading" color={"blue"} />
-
-      <div className="my-3">
-        <Slider />
-      </div>
-
-      <div className="my-2">
-        <Switcher
-          label1="Groups"
-          label2="Stores"
-          changeCallback={handleSwitcherCallback}
-          instructions="Here you can put some instructions to help your users"
-        />
+        <div className="my-2">
+          <Switcher
+            label1="Groups"
+            label2="Stores"
+            changeCallback={handleSwitcherCallback}
+            instructions="Here you can put some instructions to help your users"
+          />
+        </div>
       </div>
 
       <div style={{ marginTop: "30px" }}>
