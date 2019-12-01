@@ -41,17 +41,16 @@ const App = () => {
 
   return (
     <div style={{ width: 800, margin: "15px auto" }}>
+      <h1>Testing</h1>
+
       <ColorHeadingOne text="Colored heading one is working" color={"red"} />
 
-      {/* Our other component */}
       <ColorHeadingTwo text="Another Heading" color={"blue"} />
 
-      {/* This is my first slider component */}
       <div className="my-3">
         <Slider />
       </div>
 
-      {/* This is a little more complex switcher */}
       <div className="my-2">
         <Switcher
           label1="Groups"
@@ -61,7 +60,6 @@ const App = () => {
         />
       </div>
 
-      {/* This is our Modal Component */}
       <div style={{ marginTop: "30px" }}>
         <button className="btn btn-outline-dark" onClick={handleOpenDatePicker}>
           Select Date
