@@ -7,7 +7,7 @@ const Switcher = ({ label1, label2, instructions, changeCallback }) => {
   const handleChange = e => changeCallback(e);
 
   return (
-    <div className="row">
+    <div className="row justify-content-center">
       <span className="searchFilter">{label1}</span>
       <div className="center">
         <input
