@@ -1,11 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import DatePickerItem from "./DatePickerItem.js";
 import { convertDate, nextDate } from "./time.js";
 import { dateConfigMap } from "./dataSource";
 import { capitalize, isArray } from "./utils";
 import PropTypes from "prop-types";
 
-const DatePicker = ({ onSelect, onChange, value, ...props }) => {
+const DatePicker = ({
+  onSelect,
+  onChange,
+  value,
+  useState,
+  useEffect,
+  ...props
+}) => {
   const [time, setTime] = useState(nextDate(value || new Date()));
 
   useEffect(() => {}, [time]);
@@ -77,6 +84,7 @@ const DatePicker = ({ onSelect, onChange, value, ...props }) => {
           {confirmText}
         </a>
       </div>
+
       <div className="datepicker-caption">
         {dataConfigList.map((item, index) => (
           <div key={index} className="datepicker-caption-item">
@@ -84,6 +92,7 @@ const DatePicker = ({ onSelect, onChange, value, ...props }) => {
           </div>
         ))}
       </div>
+
       <div className="datepicker-content">
         {dataConfigList.map((item, index) => (
           <DatePickerItem
@@ -111,7 +120,9 @@ DatePicker.propTypes = {
   onCancel: PropTypes.func,
   customHeader: PropTypes.string,
   dateConfig: PropTypes.object,
-  props: PropTypes.array
+  props: PropTypes.array,
+  useState: PropTypes.func,
+  useEffect: PropTypes.func
 };
 
 export default DatePicker;

@@ -1,11 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../node_modules/bootstrap/dist/css/bootstrap.css";
-import { ModalDatePicker, Slider, Switcher } from "c5-react-library";
+import {
+  ModalDatePicker,
+  Slider,
+  Switcher,
+  useModal,
+  Modal
+} from "c5-react-library";
 
 const App = () => {
   const [time, setTime] = useState(new Date());
-
   const [isOpen, setIsOpen] = useState(false);
+  const { isShowing, toggle } = useModal(React.useState);
 
   const handleOpenDatePicker = () => {
     setIsOpen(!isOpen);
@@ -76,10 +82,29 @@ const App = () => {
       </div>
       <ModalDatePicker
         value={time}
-        isOpen={isOpen}
+        isShowing={isOpen}
         onSelect={handleDateSelect}
         onCancel={handleCloseDatePicker}
+        useState={useState}
+        useEffect={useEffect}
       />
+      <hr />
+      <div className="row justify-content-center">
+        <button className="btn btn-outline-dark" onClick={toggle}>
+          Show Portal
+        </button>
+      </div>
+      <Modal
+        id="portal"
+        className="Modal-Portal"
+        isShowing={isShowing}
+        useState={useState}
+        useEffect={useEffect}
+      >
+        <div>
+          <h3>I am a portal</h3>
+        </div>
+      </Modal>
       <hr />
       <p className="text-center mt-3">
         These are the current widgets that I have designed. More will come soon,
