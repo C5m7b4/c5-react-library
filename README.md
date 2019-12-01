@@ -1,6 +1,5 @@
 # c5-react-library
 
-[![npm](https://img.shields.io/badge/npm-v0.10.0-orange)](https://www.npmjs.com/package/c5-react-library)
 [![NPM](https://img.shields.io/npm/v/c5-react-library.svg)](https://www.npmjs.com/package/c5-react-library)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
@@ -17,13 +16,7 @@ npm install --save c5-react-library
 ```jsx
 import React, { useState } from "react";
 import "../node_modules/bootstrap/dist/css/bootstrap.css";
-import {
-  ColorHeadingOne,
-  ColorHeadingTwo,
-  ModalDatePicker,
-  Slider,
-  Switcher
-} from "c5-react-library";
+import { ModalDatePicker, Slider, Switcher } from "c5-react-library";
 
 const App = () => {
   const [time, setTime] = useState(new Date());
@@ -57,47 +50,57 @@ const App = () => {
   };
 
   return (
-    <div style={{ width: 800, margin: "15px auto" }}>
-      <ColorHeadingOne text="Colored heading one is working" color={"red"} />
-
-      {/* Our other component */}
-      <ColorHeadingTwo text="Another Heading" color={"blue"} />
-
-      {/* This is my first slider component */}
-      <div className="my-3">
-        <Slider />
+    <div className="container-fluid p-4">
+      <div className="text-center w-100 mt-3">
+        <h3>c5-react-library kitchen sink</h3>
+      </div>
+      <hr />
+      <div className="text-center my-3">
+        <h3>Basic Toggles</h3>
+      </div>
+      <div className="row justify-content-center text-center">
+        <div className="col-sm-12 col-md-6 mt-4">
+          <Slider />
+        </div>
+        <div className="col-sm-12 col-md-6 mt-4">
+          <Switcher
+            label1="Groups"
+            label2="Stores"
+            changeCallback={handleSwitcherCallback}
+            instructions="Here you can put some instructions to help your users"
+          />
+        </div>
       </div>
 
-      {/* This is a little more complex switcher */}
-      <div className="my-2">
-        <Switcher
-          label1="Groups"
-          label2="Stores"
-          changeCallback={handleSwitcherCallback}
-          instructions="Here you can put some instructions to help your users"
-        />
+      <div className="mt-4">
+        <hr />
       </div>
+      <h3 className="w-100 text-center">Date Picker</h3>
 
-      {/* This is our Modal Component */}
-      <div style={{ marginTop: "30px" }}>
-        <button className="btn btn-outline-dark" onClick={handleOpenDatePicker}>
-          Select Date
-        </button>
-        <ModalDatePicker
-          value={time}
-          isOpen={isOpen}
-          onSelect={handleDateSelect}
-          onCancel={handleCloseDatePicker}
-        />
+      <div className="row justify-content-center mt-3">
+        <div className="col-sm-12 col-md-6 text-center mt-2">
+          <button
+            className="btn btn-outline-dark"
+            onClick={handleOpenDatePicker}
+          >
+            Select Date
+          </button>
+        </div>
+        <div className="col-sm-12 col-md-6 text-center mt-2">
+          <input type="text" value={formatDate(time)} readOnly={true} />
+        </div>
       </div>
-      <div>
-        <input
-          style={{ marginTop: "20px" }}
-          type="text"
-          value={formatDate(time)}
-          readOnly={true}
-        />
-      </div>
+      <ModalDatePicker
+        value={time}
+        isOpen={isOpen}
+        onSelect={handleDateSelect}
+        onCancel={handleCloseDatePicker}
+      />
+      <hr />
+      <p className="text-center mt-3">
+        These are the current widgets that I have designed. More will come soon,
+        so keep coming back and checking out the work.
+      </p>
     </div>
   );
 };
