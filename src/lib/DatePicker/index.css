@@ -30,6 +30,12 @@
   );
 }
 
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
 .datepicker-modal {
   position: absolute;
   right: 0;

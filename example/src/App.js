@@ -1,17 +1,40 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "../node_modules/bootstrap/dist/css/bootstrap.css";
 import {
   ModalDatePicker,
-  Slider,
   Switcher,
+  Slider,
   useModal,
-  Modal
+  Modal,
+  Picker
 } from "c5-react-library";
+import "./Modal.css";
+import "./Picker.css";
+
+const fakeData = [
+  { id: 1, description: "Store 001" },
+  { id: 2, description: "Store 002" },
+  { id: 3, description: "Store 003" },
+  { id: 4, description: "Store 004" },
+  { id: 5, description: "Store 005" },
+  { id: 6, description: "Store 006" },
+  { id: 7, description: "Store 007" },
+  { id: 8, description: "Store 008" },
+  { id: 9, description: "Store 009" },
+  { id: 10, description: "Store 010" },
+  { id: 11, description: "Store 011" },
+  { id: 12, description: "Store 012" },
+  { id: 13, description: "Store 013" },
+  { id: 14, description: "Store 014" },
+  { id: 15, description: "Store 015" },
+  { id: 16, description: "Store 016" }
+];
 
 const App = () => {
   const [time, setTime] = useState(new Date());
   const [isOpen, setIsOpen] = useState(false);
-  const { isShowing, toggle } = useModal(React.useState);
+  const [groups, showGroups] = useState(false);
+  const { isShowing, toggle } = useModal(useState);
 
   const handleOpenDatePicker = () => {
     setIsOpen(!isOpen);
@@ -28,6 +51,18 @@ const App = () => {
 
   const handleSwitcherCallback = e => {
     console.log(e);
+  };
+
+  const handleSelectGroup = g => {
+    console.log(g);
+  };
+
+  const toggleShowGroups = () => {
+    showGroups(!groups);
+  };
+
+  const selectStore = s => {
+    console.log(s);
   };
 
   const formatDate = date => {
@@ -80,31 +115,45 @@ const App = () => {
           <input type="text" value={formatDate(time)} readOnly={true} />
         </div>
       </div>
+
       <ModalDatePicker
         value={time}
-        isShowing={isOpen}
+        isOpen={isOpen}
         onSelect={handleDateSelect}
         onCancel={handleCloseDatePicker}
-        useState={useState}
-        useEffect={useEffect}
       />
+
       <hr />
       <div className="row justify-content-center">
-        <button className="btn btn-outline-dark" onClick={toggle}>
-          Show Portal
+        <button className="button-default" onClick={toggle}>
+          Show Modal
         </button>
+        <Modal isShowing={isShowing} hide={toggle} header="Heres my header">
+          <div>
+            <h3>I am a Modal</h3>
+          </div>
+        </Modal>
       </div>
-      <Modal
-        id="portal"
-        className="Modal-Portal"
-        isShowing={isShowing}
-        useState={useState}
-        useEffect={useEffect}
-      >
-        <div>
-          <h3>I am a portal</h3>
-        </div>
-      </Modal>
+
+      <hr />
+      <div className="row justify-content-center">
+        <button className="btn btn-outline-dark" onClick={toggleShowGroups}>
+          Show Store Picker
+        </button>
+        <Picker
+          isShowing={groups}
+          hide={toggleShowGroups}
+          header="stores"
+          store={fakeData}
+          displayField="description"
+          valueField="id"
+          handlSelect={handleSelectGroup}
+          useEffect={useEffect}
+          useState={useState}
+          useRef={useRef}
+          onSelect={selectStore}
+        />
+      </div>
       <hr />
       <p className="text-center mt-3">
         These are the current widgets that I have designed. More will come soon,

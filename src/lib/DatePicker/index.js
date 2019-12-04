@@ -1,40 +1,47 @@
-/* eslint-disable react/jsx-indent */
-import "./index.css";
-import React from "react";
-import DatePicker from "./DatePicker.js";
-import Modal from "../common/Modal";
-import { defaultProps } from "./dataSource";
-import PropTypes from "prop-types";
+import './index.css';
+import React from 'react';
+import DatePicker from './DatePicker.js';
+import Modal from './Modal.js';
+import {defaultProps} from './dataSource';
 
-const ModalDatePicker = ({
-  isShowing,
-  onCancel,
-  onSelect,
-  useState,
-  useEffect,
-  ...props
-}) => {
-  return (
-    <div>
-      <Modal id="portal" className="Modal-Portal" isShowing={isShowing}>
-        <DatePicker
-          {...defaultProps}
-          useState={useState}
-          useEffect={useEffect}
-          onCancel={onCancel}
-          onSelect={onSelect}
-        />
-      </Modal>
-    </div>
-  );
-};
+type EnhanceDatePickerProps<T> = T & {
+    isOpen: boolean,
+}
 
-ModalDatePicker.propTypes = {
-  isShowing: PropTypes.bool,
-  onSelect: PropTypes.func,
-  onCancel: PropTypes.func,
-  useState: PropTypes.func,
-  useEffect: PropTypes.func
-};
+function EnhanceDatePicker<T: *>({ isOpen, ...props }: EnhanceDatePickerProps<T>) {
+    function onModalClose(event) {
+        if (event.target === event.currentTarget) {
+            props.onCancel();
+        }
+    }
+
+    return (
+        <div
+            style={{ display: isOpen ? '' : 'none' }}
+            onClick={onModalClose}
+            className="datepicker-modal">
+            <DatePicker {...props} />
+        </div>
+    );
+}
+
+type ModalDatePickerProps<T> = T & {
+    isPopup: boolean,
+}
+
+function ModalDatePicker<T: *>({ isPopup, ...props }: ModalDatePickerProps<T>) {
+    if (!isPopup) {
+        return <DatePicker {...props} />;
+    }
+
+    return (
+        <Modal {...props}>
+            <EnhanceDatePicker />
+        </Modal>
+    );
+}
+
+ModalDatePicker.displayName = 'MobileDatePicker';
+ModalDatePicker.defaultProps = defaultProps;
 
 export default ModalDatePicker;

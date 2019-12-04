@@ -1,0 +1,139 @@
+.picker-modal {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.picker {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: 1;
+  font-size: 16px;
+  text-align: center;
+  font-family: arial, verdana, sans-serif;
+  box-sizing: content-box;
+  -webkit-font-smoothing: antialiased;
+  user-select: none;
+}
+
+.picker.default {
+  background-color: #fff;
+}
+
+.modal-picker-header {
+  padding: 0.5em;
+  min-height: 2em;
+  line-height: 2em;
+  font-size: 1.125em;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.modal-header-caption {
+  display: flex;
+  padding: 0.5em 0.25em;
+  text-align: center;
+  justify-content: center;
+  text-transform: uppercase;
+}
+
+.modal-header-caption-item {
+  flex: 1;
+  margin: 0 0.25em;
+  height: 40px;
+  line-height: 40px;
+  font-size: 1.2em;
+}
+
+.modal-records-body {
+  display: flex;
+  padding: 0.5em 0.25em;
+}
+
+.modal-records-col {
+  flex: 1;
+  margin: 0 0.25em;
+}
+
+.modal-records-viewport {
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+}
+
+.modal-records-viewport::after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+.modal-records-viewport::after {
+  background-image: linear-gradient(
+    #f5f5f5,
+    rgba(245, 245, 245, 0) 52%,
+    rgba(245, 245, 245, 0) 48%,
+    #f5f5f5
+  );
+}
+
+.modal-records-viewport::after {
+  background-image: linear-gradient(
+    #282828,
+    rgba(40, 40, 40, 0) 52%,
+    rgba(40, 40, 40, 0) 48%,
+    #282828
+  );
+}
+
+.modal-records-wheel {
+  position: absolute;
+  height: 40px;
+  top: 50%;
+  margin-top: -20px;
+  width: 100%;
+  border-top: 2px solid var(--android-theme);
+  border-bottom: 2px solid var(--android-theme);
+}
+
+.modal-records-scroll {
+  list-style-type: none;
+  padding: 0;
+}
+
+.modal-records-scroll > li {
+  height: 40px;
+  line-height: 40px;
+  font-size: 1.375em;
+  cursor: pointer;
+}
+
+modal-picker-navbar-btn.dark {
+  background-color: var(--dark-bg);
+}
+
+modal-picker-wheel {
+  border-top: 1px solid var(--dark-theme);
+  border-bottom: 1px solid var(--dark-theme);
+}
+
+li {
+  color: var(--dark-color);
+}
+
+modal-picker-navbar-gtn {
+  color: var(--dark-disabled-color);
+}

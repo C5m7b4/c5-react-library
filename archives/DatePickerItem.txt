@@ -1,6 +1,3 @@
-/**
- * @module Date
- */
 import React, { Component } from "react";
 import * as TimeUtil from "./time.js";
 import { shallowEqual } from "./pureRender.js";
@@ -9,7 +6,7 @@ import { addPrefixCss, formatCss } from "./prefix.js";
 const DATE_HEIGHT = 40;
 const DATE_LENGTH = 10;
 const MIDDLE_INDEX = Math.floor(DATE_LENGTH / 2);
-const MIDDLE_Y = -DATE_HEIGHT * MIDDLE_INDEX;
+const MIDDLE_Y = -DATE_HEIGHT * MIDDLE_INDEX; // translateY
 
 const isUndefined = val => typeof val === "undefined";
 const isFunction = val =>
@@ -26,8 +23,14 @@ type Props = {
 
 type State = {
   translateY: number,
-  marginTop: number
+  marginTop: number,
+  hasError: false
 };
+
+static getDerifedStateFromError(error){
+  // Update state so the next render will show the fallback UI
+  return {hasError: true};
+}
 
 /**
  * Class Date
@@ -55,7 +58,7 @@ class DatePickerItem extends Component<void, Props, State> {
     this.handleContentMouseUp = this.handleContentMouseUp.bind(this);
   }
 
-  UNSAFE_componentWillMount() {
+  componentWillMount() {
     this._iniDates(this.props.value);
   }
 
@@ -67,7 +70,7 @@ class DatePickerItem extends Component<void, Props, State> {
     viewport.addEventListener("mousedown", this.handleContentMouseDown, false);
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps) {
     if (nextProps.value.getTime() === this.props.value.getTime()) {
       return;
     }
@@ -290,7 +293,7 @@ class DatePickerItem extends Component<void, Props, State> {
 
   /**
    *
-   * @param  {Object} date dat
+   * @param  {Object} date date
    * @return {Object}      JSX
    */
   renderDatepickerItem(date, index) {

@@ -1,54 +1,53 @@
 /**
- *
- * @param  {String} str
- * @return {String}
+ * 
+ * @param  {String} str 
+ * @return {String}     
  */
 export function camelCase(str) {
-  return str
-    .replace(/-([a-z])/g, ($0, $1) => $1.toUpperCase())
-    .replace("-", "");
+    return str.replace(/-([a-z])/g, ($0, $1) => $1.toUpperCase()).replace('-', '');
 }
 
 /**
- *
- * @param  {Object} props
- * @return {Object}
+ * 
+ * @param  {Object} props 
+ * @return {Object}       
  */
 export function formatCss(props) {
-  const prefixs = ["-webkit-", "-moz-", "-ms-"];
+    const prefixs = ['-webkit-', '-moz-', '-ms-'];
 
-  const result = {};
+    const result = {};
 
-  const regPrefix = /transform|transition/;
+    const regPrefix = /transform|transition/;
 
-  for (const key in props) {
-    if (props.hasOwnProperty(key)) {
-      const styleValue = props[key];
 
-      if (regPrefix.test(key)) {
-        for (let i = 0; i < prefixs.length; i++) {
-          const styleName = camelCase(prefixs[i] + key);
-          result[styleName] = styleValue.replace(regPrefix, `${prefixs[i]}$&`);
+    for (const key in props) {
+        if (props.hasOwnProperty(key)) {
+            const styleValue = props[key];
+
+            if (regPrefix.test(key)) {
+                for (let i = 0; i < prefixs.length; i++) {
+                    const styleName = camelCase(prefixs[i] + key);
+                    result[styleName] = styleValue.replace(regPrefix, `${prefixs[i]}$&`);
+                }
+            }
+
+            result[key] = styleValue;
         }
-      }
-
-      result[key] = styleValue;
     }
-  }
 
-  return result;
+    return result;
 }
 
 /**
- *
- * @param {Object} element
- * @param {Object} props   css
+ * 
+ * @param {Object} element 
+ * @param {Object} props   
  */
 export function addPrefixCss(element, props) {
-  const formatedProps = formatCss(props);
-  for (const key in formatedProps) {
-    if (formatedProps.hasOwnProperty(key)) {
-      element.style[key] = formatedProps[key];
+    const formatedProps = formatCss(props);
+    for (const key in formatedProps) {
+        if (formatedProps.hasOwnProperty(key)) {
+            element.style[key] = formatedProps[key];
+        }
     }
-  }
 }
