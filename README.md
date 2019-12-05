@@ -221,8 +221,8 @@ export default App;
 Here is a component that I found online, but couldn't get it to work, so I did a little work to it. Here is the orginal link to the component: https://www.npmjs.com/package/react-mobile-datepicker.
 At some point, I am going to try and convert this to all function components because some of the lifecycle methods have been deprecated.
 ![Image of the DatePicker modified](https://github.com/C5m7b4/c5-react-library/blob/master/github/datepicker.png)
-![Image of Group Picker](https://github.com/C5m7b4/c5-react-library/blob/master/github/groupPicker/png)
-![Image of Store Picker](https://github.com/C5m7b4/c5-react-library/blob/master/github/storePicker/png)
+![Image of Group Picker](https://github.com/C5m7b4/c5-react-library/blob/master/github/grouppicker.png)
+![Image of Store Picker](https://github.com/C5m7b4/c5-react-library/blob/master/github/storepicker.png)
 
 ## License
 
