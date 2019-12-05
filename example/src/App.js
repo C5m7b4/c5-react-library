@@ -114,6 +114,7 @@ const App = () => {
             label2="Stores"
             changeCallback={handleSwitcherCallback}
             instructions="Here you can put some instructions to help your users"
+            useState={useState}
           />
         </div>
       </div>
