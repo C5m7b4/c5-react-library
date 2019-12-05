@@ -168,7 +168,7 @@ const App = () => {
           store={fakeGroups}
           displayField="groupname"
           valueField="id"
-          handlSelect={handleSelectGroup}
+          handleSelect={handleSelectGroup}
           useEffect={useEffect}
           useState={useState}
           useRef={useRef}

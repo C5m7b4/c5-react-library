@@ -79,6 +79,7 @@ const Picker = ({
       setListenersAttached(false);
       viewportRef.current = null;
       scrollRef.current = null;
+      setTranslateY(0);
     };
   }, [store, hide, isShowing]);
 
@@ -94,7 +95,6 @@ const Picker = ({
     setTimeout(() => {
       endingYLocation = 0;
       positionsMoved = 0;
-      setTranslateY(0);
       handleSelect(selectedValue);
       hide();
     }, 200);
