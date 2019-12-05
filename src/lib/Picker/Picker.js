@@ -33,11 +33,8 @@ const Picker = ({
   const LINE_HEIGHT = 40;
   let DATA_LENGTH = store.length;
   const MIDDLE_INDEX = Math.floor(DATA_LENGTH / 2);
-  const MIDDLE_Y = -LINE_HEIGHT * MIDDLE_INDEX;
   let currentIndex = MIDDLE_INDEX;
-  let localTranslateY = 200;
   let marginTop = (currentIndex - MIDDLE_INDEX) * LINE_HEIGHT;
-  let moveDateCount = 0;
   let moveToTimer = 0;
   let oldTransY = 0;
   let positionsMoved = 0;
@@ -68,7 +65,6 @@ const Picker = ({
     draw();
 
     return function cleanUp() {
-      console.log("cleanup running...");
       viewportRef.current.removeEventListener("touchstart", handleContentTouch);
       viewportRef.current.removeEventListener("touchmove", handleContentTouch);
       viewportRef.current.removeEventListener("touchend", handleContentTouch);
@@ -149,9 +145,8 @@ const Picker = ({
     const direction = dir < 0 ? -1 : 1;
     const transY = translateY + dir;
 
-    if (checkUpdates(direction, transY)) {
-      moveDateCount = direction < 0 ? moveDateCount + 1 : moveDateCount - 1;
-    }
+    checkUpdates(direction, transY);
+
     setTranslateY(transY + endingYLocation);
   };
 

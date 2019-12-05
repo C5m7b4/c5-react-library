@@ -14,14 +14,54 @@ npm install --save c5-react-library
 ## Usage
 
 ```jsx
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "../node_modules/bootstrap/dist/css/bootstrap.css";
-import { ModalDatePicker, Slider, Switcher } from "c5-react-library";
+import {
+  ModalDatePicker,
+  Switcher,
+  Slider,
+  useModal,
+  Modal,
+  Picker
+} from "c5-react-library";
+import "./Modal.css";
+import "./Picker.css";
+
+const fakeStores = [
+  { id: 1, description: "Store 001" },
+  { id: 2, description: "Store 002" },
+  { id: 3, description: "Store 003" },
+  { id: 4, description: "Store 004" },
+  { id: 5, description: "Store 005" },
+  { id: 6, description: "Store 006" },
+  { id: 7, description: "Store 007" },
+  { id: 8, description: "Store 008" },
+  { id: 9, description: "Store 009" },
+  { id: 10, description: "Store 010" },
+  { id: 11, description: "Store 011" },
+  { id: 12, description: "Store 012" },
+  { id: 13, description: "Store 013" },
+  { id: 14, description: "Store 014" },
+  { id: 15, description: "Store 015" },
+  { id: 16, description: "Store 016" }
+];
+
+const fakeGroups = [
+  { id: 1, groupname: "My Group 1" },
+  { id: 2, groupname: "Ace" },
+  { id: 3, groupname: "Saver Group" },
+  { id: 4, groupname: "Priceless" },
+  { id: 5, groupname: "Group with Really Long Name" },
+  { id: 6, groupname: "Gas Stores" },
+  { id: 7, groupname: "Crossroads" }
+];
 
 const App = () => {
   const [time, setTime] = useState(new Date());
-
   const [isOpen, setIsOpen] = useState(false);
+  const [groups, showGroups] = useState(false);
+  const [stores, showStores] = useState(false);
+  const { isShowing, toggle } = useModal(useState);
 
   const handleOpenDatePicker = () => {
     setIsOpen(!isOpen);
@@ -37,7 +77,29 @@ const App = () => {
   };
 
   const handleSwitcherCallback = e => {
-    console.log(e);
+    if (e === true) {
+      showStores(true);
+    } else {
+      showGroups(true);
+    }
+  };
+
+  const toggleShowGroups = () => {
+    showGroups(!groups);
+  };
+
+  const toggleShowStores = () => {
+    showStores(!stores);
+  };
+
+  const handleSelectGroup = g => {
+    console.log(g);
+    showGroups(false);
+  };
+
+  const handleSelectStore = s => {
+    console.log(s);
+    showStores(false);
   };
 
   const formatDate = date => {
@@ -90,12 +152,58 @@ const App = () => {
           <input type="text" value={formatDate(time)} readOnly={true} />
         </div>
       </div>
+
       <ModalDatePicker
         value={time}
         isOpen={isOpen}
         onSelect={handleDateSelect}
         onCancel={handleCloseDatePicker}
       />
+
+      <hr />
+      <div className="row justify-content-center">
+        <button className="button-default" onClick={toggle}>
+          Show Modal
+        </button>
+        <Modal isShowing={isShowing} hide={toggle} header="Heres my header">
+          <div>
+            <h3>I am a Modal</h3>
+          </div>
+        </Modal>
+      </div>
+
+      <hr />
+      <div className="row justify-content-center">
+        <button className="btn btn-outline-dark" onClick={toggleShowGroups}>
+          Show Store Picker
+        </button>
+        <Picker
+          isShowing={groups}
+          hide={toggleShowGroups}
+          header="groups"
+          store={fakeGroups}
+          displayField="groupname"
+          valueField="id"
+          handleSelect={handleSelectGroup}
+          useEffect={useEffect}
+          useState={useState}
+          useRef={useRef}
+        />
+      </div>
+      <div className="row justify-content-center">
+        <Picker
+          isShowing={stores}
+          hide={toggleShowStores}
+          header="Stores"
+          store={fakeStores}
+          displayField="description"
+          valueField="id"
+          handleSelect={handleSelectStore}
+          useEffect={useEffect}
+          useState={useState}
+          useRef={useRef}
+        />
+      </div>
       <hr />
       <p className="text-center mt-3">
         These are the current widgets that I have designed. More will come soon,
