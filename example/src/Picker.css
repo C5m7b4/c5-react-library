@@ -35,7 +35,9 @@
   line-height: 2em;
   font-size: 1.125em;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 125px 1fr 125px;
+  border-bottom: 2px solid black;
+  align-items: center;
 }
 
 .modal-header-caption {
@@ -134,6 +136,56 @@ li {
   color: var(--dark-color);
 }
 
-modal-picker-navbar-gtn {
+modal-picker-navbar-btn {
   color: var(--dark-disabled-color);
+}
+
+.modal-navbar-btn-cancel {
+  border: 1px solid black;
+  border-radius: 10px;
+  height: 37px;
+  width: 100px;
+  margin-left: 10px;
+  background-position: center;
+  transition: background 0.8s;
+  cursor: pointer;
+  box-shadow: 0 0 4px #999;
+}
+
+.modal-navbar-btn-cancel:hover {
+  background: #000 radial-gradient(circle, transparent 1%, #000 1%)
+    center/15000%;
+  color: #fff;
+  font-weight: bold;
+  border: 1px solid #fff;
+}
+.modal-navbar-btn-cancel:active {
+  background-color: #eee;
+  background-size: 100%;
+  transition: background 0s;
+}
+
+.modal-navbar-btn-confirm {
+  border: 1px solid black;
+  border-radius: 10px;
+  height: 37px;
+  width: 100px;
+  background-position: center;
+  transition: background 0.8s;
+  cursor: pointer;
+  box-shadow: 0 0 4px #999;
+  margin-left: 10px;
+}
+
+.modal-navbar-btn-confirm:hover {
+  background: #000 radial-gradient(circle, transparent 1%, #000 1%)
+    center/15000%;
+  color: #fff;
+  font-weight: bold;
+  border: 1px solid #fff;
+}
+.modal-navbar-btn-confirm:active {
+  background-color: #eee;
+  background-size: 100%;
+  transition: background 0s;
 }

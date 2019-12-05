@@ -19,17 +19,16 @@ const PickerContents = ({
       <div className="picker-modal">
         <div className="picker default">
           <div className="modal-picker-header">
-            <a className="datepicker-navbar-btn btn-dp-cancel" onClick={hide}>
-              Cancel
+            <a className="modal-navbar-btn-cancel" onClick={hide}>
+              <span className="modal-navbar-btn-cancel-span">Cancel</span>
             </a>
             {!header ? null : (
               <div className="modal-header-caption">{header}</div>
             )}
-            <a
-              className="datepicker-navbar-btn btn-dp-confirm"
-              onClick={handleSelect}
-            >
-              Select
+            <a className="modal-navbar-btn-confirm" onClick={handleSelect}>
+              <span className="modal-navbar-btn-select-span justify-content-end">
+                Select
+              </span>
             </a>
           </div>
           <div className="modal-records-body">

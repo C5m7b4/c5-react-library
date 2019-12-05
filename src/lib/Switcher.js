@@ -3,7 +3,9 @@ import "./switcher.css";
 import PropTypes from "prop-types";
 
 const Switcher = ({ label1, label2, instructions, changeCallback }) => {
-  const handleChange = e => changeCallback(e);
+  const handleChange = e => {
+    changeCallback(e.target.checked);
+  };
 
   return (
     <div className="row justify-content-center">

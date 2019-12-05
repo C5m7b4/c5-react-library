@@ -24,6 +24,8 @@ const Picker = ({
   const [animating, setAnimating] = useState(false);
   const [translateY, setTranslateY] = useState(0);
   const [scrollStyle, setScrollStyle] = useState({});
+  const [selectedValue, setSelectedValue] = useState({});
+  const [listenersAttached, setListenersAttached] = useState(false);
 
   const scrollRef = useRef(null);
   const viewportRef = useRef(null);
@@ -42,7 +44,8 @@ const Picker = ({
   let endingYLocation = 0;
 
   useEffect(() => {
-    console.log("useEffect ran for Picker, marginTop=" + marginTop);
+    console.log("useEffect called for Picker");
+
     if (viewportRef.current === null) {
       viewportRef.current = document.getElementById("modal-viewport");
     }
@@ -54,26 +57,18 @@ const Picker = ({
     if (isUndefined(viewportRef.current) || viewportRef.current === null)
       return;
 
-    viewportRef.current.addEventListener(
-      "touchstart",
-      handleContentTouch,
-      false
-    );
-    viewportRef.current.addEventListener(
-      "touchmove",
-      handleContentTouch,
-      false
-    );
-    viewportRef.current.addEventListener("touchend", handleContentTouch, false);
-    viewportRef.current.addEventListener(
-      "mousedown",
-      handleContentMouseDown,
-      false
-    );
+    if (!listenersAttached) {
+      viewportRef.current.addEventListener("touchstart", handleContentTouch);
+      viewportRef.current.addEventListener("touchmove", handleContentTouch);
+      viewportRef.current.addEventListener("touchend", handleContentTouch);
+      viewportRef.current.addEventListener("mousedown", handleContentMouseDown);
+      setListenersAttached(true);
+    }
 
     draw();
 
     return function cleanUp() {
+      console.log("cleanup running...");
       viewportRef.current.removeEventListener("touchstart", handleContentTouch);
       viewportRef.current.removeEventListener("touchmove", handleContentTouch);
       viewportRef.current.removeEventListener("touchend", handleContentTouch);
@@ -81,6 +76,9 @@ const Picker = ({
         "mousedown",
         handleContentMouseDown
       );
+      setListenersAttached(false);
+      viewportRef.current = null;
+      scrollRef.current = null;
     };
   }, [store, hide, isShowing]);
 
@@ -88,19 +86,27 @@ const Picker = ({
     draw();
   }, [translateY]);
 
+  const handleSelectPressed = e => {
+    setScrollStyle({
+      transform: `translateY(0px)`,
+      marginTop: marginTop
+    });
+    setTimeout(() => {
+      endingYLocation = 0;
+      positionsMoved = 0;
+      setTranslateY(0);
+      handleSelect(selectedValue);
+      hide();
+    }, 200);
+  };
+
   const clearTransition = obj => {
     addPrefixCss(obj, { transition: "" });
   };
 
   const moveTo = direction => {
     setAnimating(true);
-    //addPrefixCss(scrollRef.current, { transition: "transform .2s ease-out" });
-
-    //localTranslateY = positionsMoved * LINE_HEIGHT + localTranslateY;
     endingYLocation = positionsMoved * LINE_HEIGHT * -1;
-    console.log(
-      `finalize: positionsMoved: ${positionsMoved}, vertical: ${endingYLocation}, marginTop: ${marginTop}`
-    );
     setScrollStyle({
       transform: `translateY(${endingYLocation}px)`,
       marginTop: marginTop
@@ -109,7 +115,7 @@ const Picker = ({
     // there is no transition end so we are going to use setTimeout
     moveToTimer = setTimeout(() => {
       setAnimating(false);
-      props.onSelect(store[positionsMoved]);
+      setSelectedValue(store[positionsMoved]);
       clearTransition(scrollRef.current);
       oldTransY = 0;
     }, 200);
@@ -120,14 +126,11 @@ const Picker = ({
       if (transY - oldTransY >= LINE_HEIGHT) {
         oldTransY = transY;
         positionsMoved--;
-        console.log("positionsMoved: " + positionsMoved);
       }
     } else {
-      console.log("");
       if (transY - oldTransY <= -LINE_HEIGHT) {
         oldTransY = transY;
         positionsMoved++;
-        console.log("positionsMoved: " + positionsMoved);
       }
     }
   };
@@ -149,7 +152,6 @@ const Picker = ({
     if (checkUpdates(direction, transY)) {
       moveDateCount = direction < 0 ? moveDateCount + 1 : moveDateCount - 1;
     }
-    console.log("transY:" + transY + ",endingYLocation: " + endingYLocation);
     setTranslateY(transY + endingYLocation);
   };
 
@@ -167,7 +169,8 @@ const Picker = ({
     moveTo(direction);
   };
 
-  const handleContentTouch = e => {
+  function handleContentTouch(e) {
+    console.log("touchstart");
     e.preventDefault();
     if (animating) return;
     if (e.type === "touchstart") {
@@ -177,9 +180,9 @@ const Picker = ({
     } else if (e.type === "touchend") {
       handleEnd(e);
     }
-  };
+  }
 
-  const handleContentMouseDown = e => {
+  function handleContentMouseDown(e) {
     if (animating) return;
     handleStart(e);
     viewportRef.current.addEventListener(
@@ -192,7 +195,7 @@ const Picker = ({
       handleContentMouseUp,
       false
     );
-  };
+  }
 
   const handleContentMouseMove = e => {
     if (animating) return;
@@ -228,7 +231,7 @@ const Picker = ({
               store={store}
               displayField={displayField}
               valueField={valueField}
-              handleSelect={handleSelect}
+              handleSelect={handleSelectPressed}
               scrollRef={scrollRef}
               useEffect={useEffect}
               scrollStyle={scrollStyle}

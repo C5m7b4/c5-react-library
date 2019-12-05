@@ -11,7 +11,7 @@ import {
 import "./Modal.css";
 import "./Picker.css";
 
-const fakeData = [
+const fakeStores = [
   { id: 1, description: "Store 001" },
   { id: 2, description: "Store 002" },
   { id: 3, description: "Store 003" },
@@ -30,10 +30,21 @@ const fakeData = [
   { id: 16, description: "Store 016" }
 ];
 
+const fakeGroups = [
+  { id: 1, groupname: "My Group 1" },
+  { id: 2, groupname: "Ace" },
+  { id: 3, groupname: "Saver Group" },
+  { id: 4, groupname: "Priceless" },
+  { id: 5, groupname: "Group with Really Long Name" },
+  { id: 6, groupname: "Gas Stores" },
+  { id: 7, groupname: "Crossroads" }
+];
+
 const App = () => {
   const [time, setTime] = useState(new Date());
   const [isOpen, setIsOpen] = useState(false);
   const [groups, showGroups] = useState(false);
+  const [stores, showStores] = useState(false);
   const { isShowing, toggle } = useModal(useState);
 
   const handleOpenDatePicker = () => {
@@ -50,19 +61,29 @@ const App = () => {
   };
 
   const handleSwitcherCallback = e => {
-    console.log(e);
-  };
-
-  const handleSelectGroup = g => {
-    console.log(g);
+    if (e === true) {
+      showStores(true);
+    } else {
+      showGroups(true);
+    }
   };
 
   const toggleShowGroups = () => {
     showGroups(!groups);
   };
 
-  const selectStore = s => {
+  const toggleShowStores = () => {
+    showStores(!stores);
+  };
+
+  const handleSelectGroup = g => {
+    console.log(g);
+    showGroups(false);
+  };
+
+  const handleSelectStore = s => {
     console.log(s);
+    showStores(false);
   };
 
   const formatDate = date => {
@@ -143,15 +164,28 @@ const App = () => {
         <Picker
           isShowing={groups}
           hide={toggleShowGroups}
-          header="stores"
-          store={fakeData}
-          displayField="description"
+          header="groups"
+          store={fakeGroups}
+          displayField="groupname"
           valueField="id"
           handlSelect={handleSelectGroup}
           useEffect={useEffect}
           useState={useState}
           useRef={useRef}
-          onSelect={selectStore}
+        />
+      </div>
+      <div className="row justify-content-center">
+        <Picker
+          isShowing={stores}
+          hide={toggleShowStores}
+          header="Stores"
+          store={fakeStores}
+          displayField="description"
+          valueField="id"
+          handleSelect={handleSelectStore}
+          useEffect={useEffect}
+          useState={useState}
+          useRef={useRef}
         />
       </div>
       <hr />
