@@ -166,7 +166,7 @@ modal-picker-navbar-btn {
 }
 
 .modal-navbar-btn-confirm {
-  border: 1px solid black;
+  border: 1px solid eee;
   border-radius: 10px;
   height: 37px;
   width: 100px;
@@ -178,7 +178,7 @@ modal-picker-navbar-btn {
 }
 
 .modal-navbar-btn-confirm:hover {
-  background: #000 radial-gradient(circle, transparent 1%, #000 1%)
+  background: #eee radial-gradient(circle, transparent 1%, #aaa 1%)
     center/15000%;
   color: #fff;
   font-weight: bold;

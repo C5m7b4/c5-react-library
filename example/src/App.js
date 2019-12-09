@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import "../node_modules/bootstrap/dist/css/bootstrap.css";
+import { readGroups } from "./api/GroupApi";
 import {
   ModalDatePicker,
   Switcher,
@@ -10,6 +11,8 @@ import {
 } from "c5-react-library";
 import "./Modal.css";
 import "./Picker.css";
+import { getAssignedStores } from "./api/GroupApi";
+import { useSpring, animated } from "react-spring";
 
 const fakeStores = [
   { id: 1, description: "Store 001" },
@@ -40,15 +43,76 @@ const fakeGroups = [
   { id: 7, groupname: "Crossroads" }
 ];
 
+const importedGroups = {
+  error: 0,
+  success: true,
+  groups: [
+    { id: 434, group_name: "10-1" },
+    { id: 396, group_name: "760" },
+    { id: 368, group_name: "Ace" },
+    { id: 395, group_name: "Cash Saver" },
+    { id: 430, group_name: "Over10" },
+    { id: 426, group_name: "OverTen" },
+    { id: 439, group_name: "React Group 1" },
+    { id: 440, group_name: "React Group 2" },
+    { id: 441, group_name: "React Group 3" },
+    { id: 442, group_name: "React Group 4" },
+    { id: 443, group_name: "React Group 5" },
+    { id: 366, group_name: "Test1" },
+    { id: 367, group_name: "Test2" }
+  ]
+};
+
 const App = () => {
   const [time, setTime] = useState(new Date());
   const [isOpen, setIsOpen] = useState(false);
   const [groups, showGroups] = useState(false);
   const [stores, showStores] = useState(false);
   const { isShowing, toggle } = useModal(useState);
+  const [groupList, setGroupList] = useState([]);
+  const [assignedStores, setAssignedStores] = useState([]);
+
+  useEffect(() => {
+    loadStores();
+    // readGroups(
+    //   "https://localhost:44310/api/",
+    //   "",
+    //   response => {
+    //     const j = response.data;
+    //     if (j.error === 0) {
+    //       setGroupList(j.groups);
+    //       showGroups(true);
+    //       console.log("setGroups called and setShowGroups");
+    //     } else {
+    //       console.log(j.msg);
+    //     }
+    //   },
+    //   err => {
+    //     console.log(err);
+    //   }
+    // );
+  }, []);
 
   const handleOpenDatePicker = () => {
     setIsOpen(!isOpen);
+  };
+
+  const loadStores = () => {
+    getAssignedStores(
+      "https://localhost:44310/api/",
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJDNW03YjQiLCJqdGkiOiJmNGExZmZlMC0xN2VjLTRkMWUtYmNhNC01MDVlYzAwMDM1ODciLCJleHAiOjE1NzU3MDc4NzgsImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjQ0MzIwIiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NDQzMjAifQ.LPOIhzosHwXi151btvUTpAtIdReNPXGHjA3S9PHt4FM",
+      response => {
+        const j = response.data;
+        if (j.error === 0) {
+          setAssignedStores(j.items);
+        } else {
+          console.log(j.msg);
+        }
+      },
+      err => {
+        console.log(err);
+      }
+    );
   };
 
   const handleDateSelect = time => {
@@ -95,6 +159,15 @@ const App = () => {
     return month + "/" + day + "/" + year;
   };
 
+  const animation = useSpring({
+    marginTop: "0px",
+    from: { marginTop: "-500px" }
+  });
+
+  const handleSliderChange = e => {
+    debugger;
+  };
+
   return (
     <div className="container-fluid p-4">
       <div className="text-center w-100 mt-3">
@@ -106,7 +179,7 @@ const App = () => {
       </div>
       <div className="row justify-content-center text-center">
         <div className="col-sm-12 col-md-6 mt-4">
-          <Slider />
+          <Slider onChanged={handleSliderChange} />
         </div>
         <div className="col-sm-12 col-md-6 mt-4">
           <Switcher
@@ -162,32 +235,36 @@ const App = () => {
         <button className="btn btn-outline-dark" onClick={toggleShowGroups}>
           Show Store Picker
         </button>
-        <Picker
-          isShowing={groups}
-          hide={toggleShowGroups}
-          header="groups"
-          store={fakeGroups}
-          displayField="groupname"
-          valueField="id"
-          handleSelect={handleSelectGroup}
-          useEffect={useEffect}
-          useState={useState}
-          useRef={useRef}
-        />
+        <animated.div style={animation}>
+          <Picker
+            isShowing={groups}
+            hide={toggleShowGroups}
+            header="groups"
+            store={importedGroups}
+            displayField="group_Name"
+            valueField="id"
+            handleSelect={handleSelectGroup}
+            useEffect={useEffect}
+            useState={useState}
+            useRef={useRef}
+          />
+        </animated.div>
       </div>
       <div className="row justify-content-center">
-        <Picker
-          isShowing={stores}
-          hide={toggleShowStores}
-          header="Stores"
-          store={fakeStores}
-          displayField="description"
-          valueField="id"
-          handleSelect={handleSelectStore}
-          useEffect={useEffect}
-          useState={useState}
-          useRef={useRef}
-        />
+        <animated.div style={animation}>
+          <Picker
+            isShowing={stores}
+            hide={toggleShowStores}
+            header="Stores"
+            store={assignedStores}
+            displayField="store_Name"
+            valueField="storeid"
+            handleSelect={handleSelectStore}
+            useEffect={useEffect}
+            useState={useState}
+            useRef={useRef}
+          />
+        </animated.div>
       </div>
       <hr />
       <p className="text-center mt-3">

@@ -8,7 +8,8 @@ const Switcher = ({
   label2,
   instructions,
   changeCallback,
-  useState
+  useState,
+  headerText
 }) => {
   const [popoveropen, setPopoverOpen] = useState(false);
 
@@ -22,8 +23,8 @@ const Switcher = ({
 
   return (
     <div className="row justify-content-center">
-      <span className="searchFilter">{label1}</span>
-      <div className="center">
+      <span className="col-xs-12 col-sm-3 searchFilter">{label1}</span>
+      <div className="col-xs-12 col-sm-4 center">
         <input
           className="switcher"
           onChange={handleChange}
@@ -31,7 +32,7 @@ const Switcher = ({
           name=""
         />
       </div>
-      <span className="searchFilter">{label2}</span>
+      <span className="col-xs-12 col-sm-3 searchFilter">{label2}</span>
       <button
         className="btn btn-outline-info help-btn"
         id="switcherHelp"
@@ -39,18 +40,22 @@ const Switcher = ({
       >
         ?
       </button>
-      {
-        <Popover
-          trigger="legacy"
-          isOpen={popoveropen}
-          toggle={togglePopover}
-          placement="bottom"
-          target="switcherHelp"
-        >
-          <PopoverHeader>Helpful Instructions</PopoverHeader>
-          <PopoverBody>{instructions}</PopoverBody>
-        </Popover>
-      }
+      <div className="col-xs-12 col-sm-2">
+        {
+          <Popover
+            trigger="legacy"
+            isOpen={popoveropen}
+            toggle={togglePopover}
+            placement="bottom"
+            target="switcherHelp"
+          >
+            <PopoverHeader>
+              {headerText || "Helpful Instructions"}
+            </PopoverHeader>
+            <PopoverBody>{instructions}</PopoverBody>
+          </Popover>
+        }
+      </div>
     </div>
   );
 };
@@ -60,7 +65,8 @@ Switcher.propTypes = {
   label2: PropTypes.string,
   instructions: PropTypes.string,
   changeCallback: PropTypes.func,
-  useState: PropTypes.func
+  useState: PropTypes.func,
+  headerText: PropTypes.string
 };
 
 export default Switcher;

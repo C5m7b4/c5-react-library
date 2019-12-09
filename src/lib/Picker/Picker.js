@@ -19,6 +19,8 @@ const Picker = ({
   useEffect,
   useState,
   useRef,
+  debug,
+  debugListeners,
   ...props
 }) => {
   const [animating, setAnimating] = useState(false);
@@ -41,7 +43,7 @@ const Picker = ({
   let endingYLocation = 0;
 
   useEffect(() => {
-    console.log("useEffect called for Picker");
+    if (debug) console.log("useEffect called for Picker");
 
     if (viewportRef.current === null) {
       viewportRef.current = document.getElementById("modal-viewport");
@@ -60,11 +62,13 @@ const Picker = ({
       viewportRef.current.addEventListener("touchend", handleContentTouch);
       viewportRef.current.addEventListener("mousedown", handleContentMouseDown);
       setListenersAttached(true);
+      if (debug) console.log("listeners have been attached");
     }
 
     draw();
 
     return function cleanUp() {
+      if (debug) console.log("cleanup is running to remove event listeners");
       viewportRef.current.removeEventListener("touchstart", handleContentTouch);
       viewportRef.current.removeEventListener("touchmove", handleContentTouch);
       viewportRef.current.removeEventListener("touchend", handleContentTouch);
@@ -132,6 +136,7 @@ const Picker = ({
   };
 
   const handleStart = e => {
+    if (debugListeners) console.log("handle start is running");
     if (oldTransY === 0) {
       touchY = getLocalTouchY(e);
       setTranslateY(touchY);
@@ -178,6 +183,7 @@ const Picker = ({
   }
 
   function handleContentMouseDown(e) {
+    if (debugListeners) console.log("mousedown detected");
     if (animating) return;
     handleStart(e);
     viewportRef.current.addEventListener(
@@ -248,7 +254,11 @@ Picker.propTypes = {
   displayField: PropTypes.string,
   useEffect: PropTypes.func,
   useState: PropTypes.func,
-  useRef: PropTypes.func
+  useRef: PropTypes.func,
+  debug: PropTypes.bool,
+  debugListeners: PropTypes.bool,
+  useSpring: PropTypes.any,
+  animated: PropTypes.any
 };
 
 export default Picker;
